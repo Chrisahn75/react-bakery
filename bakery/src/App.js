@@ -35,7 +35,6 @@ class App extends React.Component {
   };
 
   render() {
-    console.log(this.state.activeTab);
     return (
       <>
         <h1>Bakery</h1>
