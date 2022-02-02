@@ -1,4 +1,3 @@
-// REACT
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,7 +13,12 @@ class App extends React.Component {
       activeTab: "Add",
       items: [],
     };
+    this.selectAdd= this.selectAdd.bind(this);
+    this.selectList= this.selectList.bind(this);
+    this.selectPay= this.selectPay.bind(this);
+    this.add = this.add.bind(this)
   }
+  
 
   selectAdd = () => {
     this.setState({
@@ -33,6 +37,29 @@ class App extends React.Component {
       activeTab: "pay",
     });
   };
+
+  add(name, price) {
+    const obj = {
+      name: name,
+      price: price
+    }
+    const newList = this.state.items
+    newList.push(obj)
+    this.setState({
+      items: newList
+    })
+  }
+  
+  renderContent = () => {
+    switch(this.state.activeTabs) {
+      case 'add':
+        return <Add addItem={this.add}></Add>
+      case 'list':
+        return <List listItems={this.state.items}></List>
+      case 'pay':
+        return <Pay></Pay>
+    }
+  }
 
   render() {
     return (
@@ -56,6 +83,7 @@ class App extends React.Component {
         >
           Pay
         </Button>
+        {this.renderContent()}
       </>
     );
   }
